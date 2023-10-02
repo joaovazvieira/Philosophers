@@ -63,4 +63,5 @@ bool			printer(t_philos *eater, t_msg msg);
 long			get_current_time(void);
 void			get_fork(pthread_mutex_t *fork, t_philos *eater);
 void			admin_ruben(t_philos *eaters);
+void			ft_usleep(long time, t_philos *eater);
 #endif

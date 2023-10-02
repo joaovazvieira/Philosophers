@@ -21,21 +21,22 @@ bool	check_dead_eater(t_info *data)
 {
 	bool	dead;
 
-	pthread_mutex_lock(&data->god_mutex);
+	// pthread_mutex_lock(&data->god_mutex);
 	dead = data->dead;
-	pthread_mutex_unlock(&data->god_mutex);
+	// pthread_mutex_unlock(&data->god_mutex);
 	return (dead);
 }
 
 static bool	admin_helper(t_philos *eater)
 {
 	int	t;
-
+// need to add mutex for safety
 	t = get_current_time();
 	if (t - eater->last_ate_time > eater->data->t_die)
 	{
 		printer(eater, DIE);
 		eater->data->dead = true;
+		return (true);
 	}
 	return (false);
 }

@@ -33,6 +33,29 @@ int	passed_time(t_info *data)
 	return (current_time - data->start_time);
 }
 
+static long	get_time(void)
+{
+	struct timeval	t;
+
+	if (gettimeofday(&t, NULL) == -1)
+		return (0);
+	return (t.tv_usec + t.tv_sec * 1000000);
+}
+
+// still need to be tweeked, clunky
+void	ft_usleep(long time, t_philos *eater)
+{
+	long	t;
+
+	t = get_time();
+	while (time >= get_time() - t)
+	{
+		usleep(300);
+		if (check_dead_eater(eater->data) == true)
+			return ;
+	}
+}
+
 /*
 	* Function fork mutex with msg.
 */

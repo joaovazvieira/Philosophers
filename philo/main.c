@@ -57,5 +57,7 @@ int	main(int argc, char **argv)
 		pthread_join(eaters[i].thread, NULL);
 		i--;
 	}
+	free(data.fork);
+	free(eaters);
 	return (0);
 }

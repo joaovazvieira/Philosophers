@@ -21,18 +21,16 @@ static void	eat(t_philos *eater)
 		get_fork(eater->forkRight, eater);
 		printer(eater, EAT);
 		eater->meals_ate++;
-		eater->last_ate_time = get_current_time();
-		usleep(eater->data->t_eat * 1000);
+		ft_usleep(eater->data->t_eat * 1000, eater);
 		pthread_mutex_unlock(eater->forkRight);
 		pthread_mutex_unlock(eater->forkLeft);
-	// mutex from fork L R lock, print eating, usleep(t_eat) unlock, 
 }
 
 static void	ft_sleep(t_philos *eater)
 {
 
 	printer(eater, SLEEP);
-	usleep(eater->data->t_sleep * 1000);
+	ft_usleep(eater->data->t_sleep *1000, eater);
 
 }
 
@@ -55,7 +53,7 @@ static void	*creator(void *temp)
 	i = 1;
 	eater = (t_philos *)temp;
 	eater->last_ate_time = get_current_time();
-	while (i <= eater->data->nb_philos) //needs to be constant loop, eat need to verify if already ate
+	while (1) //needs to be constant loop, eat need to verify if already ate
 	{
 		think(eater);
 		eat(eater);
