@@ -19,10 +19,10 @@
 
 long	get_current_time(void)
 {
-	struct timeval	stime;
+	struct timeval	time;
 
-	gettimeofday(&stime, NULL);
-	return ((stime.tv_sec * 1000) + (stime.tv_usec / 1000));
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
 int	passed_time(t_info *data)
@@ -43,16 +43,17 @@ static long	get_time(void)
 }
 
 // still need to be tweeked, clunky
-void	ft_usleep(long time, t_philos *eater)
+void	ft_usleep(long time_to_wait, t_philos *eater)
 {
-	long	t;
+	long	start_time;
 
-	t = get_time();
-	while (time >= get_time() - t)
+	start_time = get_time();
+	while ((get_time() - start_time) < time_to_wait)
 	{
-		usleep(300);
-		if (check_dead_eater(eater->data) == true)
-			return ;
+		if (eater)
+			if (check_dead_eater(eater->data) == true)
+				return ;
+		usleep(250);
 	}
 }
 

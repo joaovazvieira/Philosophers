@@ -29,8 +29,8 @@ bool	printer(t_philos *eater, t_msg msg)
 		printf("%5i %i died\n", time, eater->id);
 	else if (msg == EAT)
 	{
-		eater->last_ate_time = time;
-		printf("%5i %i eating\n", eater->last_ate_time, eater->id);
+		//eater->last_ate_time = time;
+		printf("%5i %i eating\n", time, eater->id);
 	}
 	else if (msg == FORK)
 		printf("%5i %i took a fork\n", time, eater->id);

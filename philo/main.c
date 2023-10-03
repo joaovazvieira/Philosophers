@@ -24,6 +24,7 @@ static int	var_init(t_info *data, t_philos **eaters)
 	(*eaters) = malloc(sizeof(t_philos) * data->nb_philos);
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
 	pthread_mutex_init(&data->god_mutex, NULL);
+	pthread_mutex_init(&data->god_time_mutex, NULL);
 	while (i < data->nb_philos)
 	{
 		(*eaters)[i].data = data;
@@ -31,6 +32,7 @@ static int	var_init(t_info *data, t_philos **eaters)
 		i++;
 	}
 	data->dead = false;
+	data->num_of_created_eaters = 0;
 	data->start_time = get_current_time();
 	return (0);
 }

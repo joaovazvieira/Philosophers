@@ -40,6 +40,7 @@ typedef struct	t_info
 	bool			dead;
 	long			start_time;
 	pthread_mutex_t	god_mutex;
+	pthread_mutex_t	god_time_mutex;
 	pthread_mutex_t	*fork;
 }				t_info;
 
@@ -63,5 +64,5 @@ bool			printer(t_philos *eater, t_msg msg);
 long			get_current_time(void);
 void			get_fork(pthread_mutex_t *fork, t_philos *eater);
 void			admin_ruben(t_philos *eaters);
-void			ft_usleep(long time, t_philos *eater);
+void			ft_usleep(long time_to_wait, t_philos *eater);
 #endif

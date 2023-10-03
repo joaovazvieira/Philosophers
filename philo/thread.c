@@ -17,6 +17,9 @@
 */
 static void	eat(t_philos *eater)
 {
+	// pthread_mutex_lock(&eater->data->god_time_mutex);
+	// eater->last_ate_time = get_current_time();
+	// pthread_mutex_unlock(&eater->data->god_time_mutex);
 		get_fork(eater->forkLeft, eater);
 		get_fork(eater->forkRight, eater);
 		printer(eater, EAT);
@@ -28,10 +31,8 @@ static void	eat(t_philos *eater)
 
 static void	ft_sleep(t_philos *eater)
 {
-
 	printer(eater, SLEEP);
-	ft_usleep(eater->data->t_sleep *1000, eater);
-
+	ft_usleep(eater->data->t_sleep * 1000, eater);
 }
 
 static void	think(t_philos *eater)
@@ -48,17 +49,14 @@ static void	think(t_philos *eater)
 static void	*creator(void *temp)
 {
 	t_philos *eater;
-	int	i;
 
-	i = 1;
 	eater = (t_philos *)temp;
 	eater->last_ate_time = get_current_time();
 	while (1) //needs to be constant loop, eat need to verify if already ate
 	{
-		think(eater);
 		eat(eater);
 		ft_sleep(eater);
-		i++;
+		think(eater);
 	}
 	return (0);
 }
@@ -75,6 +73,7 @@ int	create_id_thread(t_info *data, t_philos	*eater, pthread_mutex_t *fork)
 		eater[i].forkRight = &fork[(i + 1) % data->nb_philos];
 		if (pthread_create(&eater[i].thread, NULL, creator, &eater[i]))
 			return (i);
+		data->num_of_created_eaters++;
 		i++;
 	}
 	return (i - 1);

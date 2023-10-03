@@ -26,12 +26,13 @@ bool	check_dead_eater(t_info *data)
 	// pthread_mutex_unlock(&data->god_mutex);
 	return (dead);
 }
-
+// mutex for time
 static bool	admin_helper(t_philos *eater)
 {
 	int	t;
-// need to add mutex for safety
+	// need to add mutex for safety
 	t = get_current_time();
+	// printf("t - last = %i\n", t - eater->last_ate_time);
 	if (t - eater->last_ate_time > eater->data->t_die)
 	{
 		printer(eater, DIE);
@@ -50,8 +51,11 @@ void	admin_ruben(t_philos *eaters)
 {
 	int	i;
 
+	//printf("num of eaters - %i\n", eaters->data->num_of_created_eaters);
 	if	(eaters->data->num_of_created_eaters != eaters->data->nb_philos)
 		return ;
+	// need to set num of created eaters to increment!!!
+	//printf("eaters->data->nb_philos = %d\n", eaters->data->nb_philos);
 	while (1)
 	{
 		i = 0;
