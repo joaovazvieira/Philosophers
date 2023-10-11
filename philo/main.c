@@ -25,7 +25,8 @@ static int	var_init(t_info *data, t_philos **eaters)
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philos);
 	pthread_mutex_init(&data->god_mutex, NULL);
 	pthread_mutex_init(&data->god_time_mutex, NULL);
-	while (i < data->nb_philos)
+	pthread_mutex_init(&data->god_print_mutex, NULL);
+	while (i < data->nb_philos) // check how many mutex fork were created
 	{
 		(*eaters)[i].data = data;
 		pthread_mutex_init(&data->fork[i], NULL);
@@ -59,7 +60,7 @@ int	main(int argc, char **argv)
 		pthread_join(eaters[i].thread, NULL);
 		i--;
 	}
-	free(data.fork);
+	free(data.fork); // free the ammount created, dont free all
 	free(eaters);
 	return (0);
 }

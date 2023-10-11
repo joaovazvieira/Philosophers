@@ -14,8 +14,8 @@ NAME 	= philo
 HEADER 	= philo.h
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra
-# CFLAGS	+= -fsanitize=thread -g
-CFLAGS	+= -fsanitize=address -g
+CFLAGS	+= -fsanitize=thread -g
+# CFLAGS	+= -fsanitize=address -g
 SRC_DIR	= philo #$(shell find src -type f -name "*.c")
 OBJ		= $(SRC:%.c=obj/%.o)
 OBJ_DIR	= obj

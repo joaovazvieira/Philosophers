@@ -41,6 +41,7 @@ typedef struct	t_info
 	long			start_time;
 	pthread_mutex_t	god_mutex;
 	pthread_mutex_t	god_time_mutex;
+	pthread_mutex_t	god_print_mutex;
 	pthread_mutex_t	*fork;
 }				t_info;
 
@@ -61,8 +62,8 @@ int				create_id_thread(t_info *data, t_philos	*eater, pthread_mutex_t *fork);
 int				passed_time(t_info *data);
 bool			check_dead_eater(t_info *data);
 bool			printer(t_philos *eater, t_msg msg);
-long			get_current_time(void);
+unsigned long	get_current_time(void);
 void			get_fork(pthread_mutex_t *fork, t_philos *eater);
 void			admin_ruben(t_philos *eaters);
-void			ft_usleep(long time_to_wait, t_philos *eater);
+void			ft_usleep(unsigned long time_to_wait, t_philos *eater);
 #endif

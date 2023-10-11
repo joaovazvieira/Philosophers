@@ -21,9 +21,9 @@ bool	check_dead_eater(t_info *data)
 {
 	bool	dead;
 
-	// pthread_mutex_lock(&data->god_mutex);
+	pthread_mutex_lock(&data->god_mutex);
 	dead = data->dead;
-	// pthread_mutex_unlock(&data->god_mutex);
+	pthread_mutex_unlock(&data->god_mutex);
 	return (dead);
 }
 // mutex for time
@@ -32,15 +32,20 @@ static bool	admin_helper(t_philos *eater)
 	int	t;
 	// need to add mutex for safety
 	t = get_current_time();
-	// printf("t - last = %i\n", t - eater->last_ate_time);
+	pthread_mutex_lock(&eater->data->god_time_mutex);
 	if (t - eater->last_ate_time > eater->data->t_die)
 	{
 		printer(eater, DIE);
+		pthread_mutex_lock(&eater->data->god_mutex);
 		eater->data->dead = true;
+		pthread_mutex_unlock(&eater->data->god_time_mutex);
+		pthread_mutex_unlock(&eater->data->god_mutex);
 		return (true);
 	}
+	pthread_mutex_unlock(&eater->data->god_time_mutex);
 	return (false);
 }
+
 /*
 	* Function admin keeps in check if the number of threads created,
 	* match the number of philos requested,
@@ -51,11 +56,8 @@ void	admin_ruben(t_philos *eaters)
 {
 	int	i;
 
-	//printf("num of eaters - %i\n", eaters->data->num_of_created_eaters);
 	if	(eaters->data->num_of_created_eaters != eaters->data->nb_philos)
 		return ;
-	// need to set num of created eaters to increment!!!
-	//printf("eaters->data->nb_philos = %d\n", eaters->data->nb_philos);
 	while (1)
 	{
 		i = 0;
@@ -65,5 +67,6 @@ void	admin_ruben(t_philos *eaters)
 				return ;
 			i++;
 		}
+		usleep(500);
 	}
 }

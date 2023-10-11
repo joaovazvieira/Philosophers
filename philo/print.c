@@ -21,23 +21,23 @@ bool	printer(t_philos *eater, t_msg msg)
 {
 	int	time;
 
-	pthread_mutex_lock(&eater->data->god_mutex);
+	pthread_mutex_lock(&eater->data->god_print_mutex);
 	time = passed_time(eater->data);
 	if (check_dead_eater(eater->data) == true)
+	{	
+		pthread_mutex_unlock(&eater->data->god_print_mutex);
 		return (true);
-	if (msg == DIE)
-		printf("%5i %i died\n", time, eater->id);
-	else if (msg == EAT)
-	{
-		//eater->last_ate_time = time;
-		printf("%5i %i eating\n", time, eater->id);
 	}
+	if (msg == DIE)
+		printf("%i %i died\n", time, eater->id);
+	else if (msg == EAT)
+		printf("%i %i is eating\n", time, eater->id);
 	else if (msg == FORK)
-		printf("%5i %i took a fork\n", time, eater->id);
+		printf("%i %i has taken a fork\n", time, eater->id);
 	else if (msg == SLEEP)
-		printf("%5i %i sleeping\n", time, eater->id);
+		printf("%i %i is sleeping\n", time, eater->id);
 	else
-		printf("%5i %i thinking\n", time, eater->id);
-	pthread_mutex_unlock(&eater->data->god_mutex);
+		printf("%i %i is thinking\n", time, eater->id);
+	pthread_mutex_unlock(&eater->data->god_print_mutex);
 	return (false);
 }
