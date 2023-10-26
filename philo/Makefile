@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jovieira <jovieira@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/30 16:44:34 by jovieira          #+#    #+#              #
-#    Updated: 2023/09/20 16:43:59 by jovieira         ###   ########.fr        #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: jovieira <jovieira@student.42.fr>            +#+                      #
+#                                                    +#+                       #
+#    Created: 2023/08/30 16:44:34 by jovieira      #+#    #+#                  #
+#    Updated: 2023/10/26 15:48:34 by jovieira      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME 	= philo
 HEADER 	= philo.h
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra
-CFLAGS	+= -fsanitize=thread -g
+# CFLAGS	+= -fsanitize=thread -g
 # CFLAGS	+= -fsanitize=address -g
 SRC_DIR	= philo #$(shell find src -type f -name "*.c")
 OBJ		= $(SRC:%.c=obj/%.o)
@@ -26,6 +26,7 @@ SRC		= main.c\
 		  thread.c\
 		  parsing.c\
 		  extra_utils.c\
+		  var_init_utils.c\
 
 
 all: $(NAME)

@@ -44,8 +44,8 @@ static int	ft_atoi(const char *str)
 	}
 	while (ft_isdigit(str[i]))
 	{
-			sum = (sum * 10) + (str[i] - '0');
-			i++;
+		sum = (sum * 10) + (str[i] - '0');
+		i++;
 	}
 	if (ft_isdigit(str[i]) == 0 && str[i] != '\0')
 		return (-1);
@@ -56,7 +56,6 @@ static int	ft_atoi(const char *str)
 	* Parser function using atoi to convert the input in int,
 	* also checking if the input is valid.
 */
-
 int	parse(char **argv, t_info *data)
 {
 	data->nb_philos = ft_atoi(argv[1]);
@@ -64,11 +63,15 @@ int	parse(char **argv, t_info *data)
 	data->t_eat = ft_atoi(argv[3]);
 	data->t_sleep = ft_atoi(argv[4]);
 	if (argv[5])
+	{
 		data->xt_eat = ft_atoi(argv[5]);
+		if (data->xt_eat <= 0)
+			return (-1);
+	}
 	else
-		data->xt_eat = 0;
+		data->xt_eat = -1;
 	if (data->nb_philos <= 0 || data->t_die <= 0 || data->t_eat <= 0 \
-		|| data->t_sleep <= 0 || data->xt_eat == -1)
+		|| data->t_sleep <= 0)
 		return (-1);
 	return (0);
 }

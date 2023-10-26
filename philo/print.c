@@ -23,8 +23,8 @@ bool	printer(t_philos *eater, t_msg msg)
 
 	pthread_mutex_lock(&eater->data->god_print_mutex);
 	time = passed_time(eater->data);
-	if (check_dead_eater(eater->data) == true)
-	{	
+	if (check_dead_eater(eater->data) == true && msg != ALLFED)
+	{
 		pthread_mutex_unlock(&eater->data->god_print_mutex);
 		return (true);
 	}
@@ -36,8 +36,10 @@ bool	printer(t_philos *eater, t_msg msg)
 		printf("%i %i has taken a fork\n", time, eater->id);
 	else if (msg == SLEEP)
 		printf("%i %i is sleeping\n", time, eater->id);
-	else
+	else if (msg == THINK)
 		printf("%i %i is thinking\n", time, eater->id);
+	else
+		printf("All meals ate\n");
 	pthread_mutex_unlock(&eater->data->god_print_mutex);
 	return (false);
 }
