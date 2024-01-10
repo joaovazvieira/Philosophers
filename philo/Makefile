@@ -6,7 +6,7 @@
 #    By: jovieira <jovieira@student.42.fr>            +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/08/30 16:44:34 by jovieira      #+#    #+#                  #
-#    Updated: 2023/10/26 15:48:34 by jovieira      ########   odam.nl          #
+#    Updated: 2023/12/08 15:43:43 by jovieira      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRC		= main.c\
 		  thread.c\
 		  parsing.c\
 		  extra_utils.c\
+		  mutex_utils.c\
 		  var_init_utils.c\
+		  end_prog_utils.c\
 
 
 all: $(NAME)

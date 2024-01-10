@@ -6,7 +6,7 @@
 /*   By: jovieira <jovieira@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/09/14 18:14:36 by jovieira      #+#    #+#                 */
-/*   Updated: 2023/10/25 18:37:02 by jovieira      ########   odam.nl         */
+/*   Updated: 2024/01/10 18:47:19 by jovieira      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 	* Function that allow the admin to set 'eaters' as dead.
-	* main mutex used to operate this check function.
+	* main god mutex used to operate this check function.
 */
 bool	check_dead_eater(t_info *data)
 {
@@ -28,7 +28,7 @@ bool	check_dead_eater(t_info *data)
 
 static bool	admin_helper(t_philos *eater)
 {
-	int	t;
+	long	t;
 
 	t = get_current_time();
 	pthread_mutex_lock(&eater->god_time_mutex);
@@ -92,6 +92,8 @@ void	admin_ruben(t_philos *eaters)
 		i = 0;
 		while (i < eaters->data->nb_philos)
 		{
+			// if (eaters[i].left_fork != true)
+			// 	pthread_mutex_unlock(eaters[i].forkright);
 			eaters_fed = meal_check(eaters, i, eaters_fed);
 			if (admin_helper(&eaters[i]) == true)
 				return ;

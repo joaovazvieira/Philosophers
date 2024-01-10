@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jovieira <jovieira@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:25:49 by jovieira          #+#    #+#             */
-/*   Updated: 2023/09/20 21:19:53 by jovieira         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   parsing.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: jovieira <jovieira@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2023/08/21 16:25:49 by jovieira      #+#    #+#                 */
+/*   Updated: 2023/11/22 15:18:27 by jovieira      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static int	ft_atoi(const char *str)
 	* Parser function using atoi to convert the input in int,
 	* also checking if the input is valid.
 */
+// adicionar msg de erro
 int	parse(char **argv, t_info *data)
 {
 	data->nb_philos = ft_atoi(argv[1]);
