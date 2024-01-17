@@ -37,11 +37,6 @@ static bool	admin_helper(t_philos *eater)
 		printer(eater, MSGDIE, DIE);
 		pthread_mutex_lock(&eater->data->god_mutex);
 		eater->data->dead = true;
-		if (eater->data->nb_philos == 1)
-		{
-			pthread_mutex_unlock(eater->forkleft);
-			pthread_mutex_unlock(eater->forkright);
-		}
 		pthread_mutex_unlock(&eater->god_time_mutex);
 		pthread_mutex_unlock(&eater->data->god_mutex);
 		return (true);
@@ -85,7 +80,7 @@ void	admin_ruben(t_philos *eaters)
 
 	if (eaters->data->num_of_created_eaters != eaters->data->nb_philos)
 		return ;
-	usleep(500);
+	usleep(1500);
 	while (1)
 	{
 		eaters_fed = 0;
@@ -99,6 +94,6 @@ void	admin_ruben(t_philos *eaters)
 		}
 		if (done_eating(eaters, eaters_fed) == 1)
 			break ;
-		usleep(500);
+		usleep(1500);
 	}
 }

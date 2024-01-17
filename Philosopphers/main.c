@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	if (var_init(&data, &eaters) == 1)
 		return (1);
 	i = create_id_thread(&data, eaters, data.fork);
-	if (i - 1 != data.nb_philos)
+	if (i != data.nb_philos)
 	{
 		error_close(eaters, i);
 		return (1);

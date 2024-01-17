@@ -12,6 +12,18 @@
 
 #include "philo.h"
 
+int	single_check(t_philos *eater)
+{
+	if (eater->data->nb_philos == 1)
+	{
+		pthread_mutex_unlock(eater->forkright);
+		return (1);
+	}
+	else
+		get_fork(eater->forkleft, eater);
+	return (0);
+}
+
 void	error_close(t_philos *eaters, int i)
 {
 	admin_ruben(eaters);

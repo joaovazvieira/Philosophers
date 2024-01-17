@@ -34,11 +34,9 @@ int	passed_time(t_info *data)
 
 void	ft_usleep(unsigned long time_to_wait, t_philos *eater)
 {
-	const int	x = 300 + (5 * eater->data->nb_philos);
-
 	time_to_wait = time_to_wait + get_current_time();
 	while (get_current_time() < time_to_wait && !check_dead_eater(eater->data))
-		usleep(x);
+		usleep(500);
 }
 
 // Function fork mutex with msg.

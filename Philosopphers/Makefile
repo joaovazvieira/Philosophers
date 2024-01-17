@@ -12,7 +12,7 @@
 
 NAME 	= philo
 HEADER 	= philo.h
-CC		= gcc
+CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -O3
 DEBUG = 0  # Set to 1 for debug mode, 0 for regular mode
 LEAK = 0

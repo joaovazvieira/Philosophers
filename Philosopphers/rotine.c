@@ -15,10 +15,11 @@
 /*
 	* Function that feeds the 'eaters' and counts their meals.
 */
-static void	ft_eat(t_philos *eater)
+static int	ft_eat(t_philos *eater)
 {
 	get_fork(eater->forkright, eater);
-	get_fork(eater->forkleft, eater);
+	if (single_check(eater) == 1)
+		return (1);
 	printer(eater, MSGEAT, EAT);
 	eater->xt_eat--;
 	pthread_mutex_lock(&eater->god_time_mutex);
@@ -27,19 +28,20 @@ static void	ft_eat(t_philos *eater)
 	ft_usleep(eater->data->t_eat, eater);
 	pthread_mutex_unlock(eater->forkleft);
 	pthread_mutex_unlock(eater->forkright);
+	return (0);
 }
 
 static void	ft_sleep(t_philos *eater)
 {
+	if (eater->data->t_die - ((int)get_current_time() - eater->last_ate_time) 
+		> eater->data->t_eat)
+		usleep(200);
 	printer(eater, MSGSLEEP, SLEEP);
 	ft_usleep(eater->data->t_sleep, eater);
 }
 
 static bool	ft_think(t_philos *eater)
 {
-	if (eater->data->t_die - ((int)get_current_time() - eater->last_ate_time) \
-		> eater->data->t_eat)
-		ft_usleep(200, eater);
 	printer(eater, MSGTHINK, THINK);
 	return (check_dead_eater(eater->data));
 }
@@ -58,10 +60,11 @@ static void	*sim(void *temp)
 		return (NULL);
 	pthread_mutex_unlock(&eater->data->god_start_mutex);
 	if (eater->id % 2)
-		usleep (1100);
+		usleep (25000);
 	while (1)
 	{
-		ft_eat(eater);
+		if (ft_eat(eater))
+			break ;
 		ft_sleep(eater);
 		if (ft_think(eater) == true)
 			break ;

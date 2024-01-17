@@ -85,6 +85,7 @@ int				var_init(t_info *data, t_philos **eaters);
 // thread creation with  static simulation and actions
 int				create_id_thread(t_info *data, t_philos	*eater, \
 				pthread_mutex_t *fork);
+int				single_check(t_philos *eater);
 void			join_thread(t_philos *eaters, int i);
 
 // time related functions
